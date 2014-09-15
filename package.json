@@ -1,7 +1,7 @@
 {
   "name": "ago",
-  "version": "0.1.0",
-  "description": "Human-friendly timedeltas for Node.js",
+  "version": "0.0.1",
+  "description": "Fuzzy timestamps for Node.js",
   "maintainers": [
     {
       "name": "csparpa",
