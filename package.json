@@ -1,0 +1,24 @@
+{
+  "name": "ago",
+  "version": "0.1.0",
+  "description": "Human-friendly timedeltas for Node.js",
+  "maintainers": [
+    {
+      "name": "csparpa",
+      "email": "csparpa@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/csparpa/ago.git"
+  },
+  "bugs": {
+    "url": "http://github.com/csparpa/ago/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/csparpa/ago/raw/master/LICENSE"
+    }
+  ]
+}
