@@ -1,5 +1,5 @@
-ago
-===
+Timehaze
+========
 
 Fuzzy timestamps for Node.js
 
@@ -12,18 +12,18 @@ far_future = new Date(2567, 0, 18, 14, 1, 0);
 close_past = new Date(2014, 8, 14, 21, 10, 24);
 
 // Import module's API
-var ago = require('ago');
+var timehaze = require('timehaze');
 
 /**
 * Timedeltas
 */
 
 // Timedeltas between two timestamps
-delta = ago.delta(a_date, far_future);
+delta = timehaze.delta(a_date, far_future);
 console.log(delta.pretty());    // 'In more than 500 years'
 
 // ... or with respect to current timestamp
-delta = ago.delta(close_past);
+delta = timehaze.delta(close_past);
 console.log(delta.pretty());    // 'Yesterday'
 
 /**
@@ -51,14 +51,14 @@ console.log(values);    // {
                         // }
 
 // Localise output
-ago.setFuzzyLabels({
+timehaze.setFuzzyLabels({
   "ago": "fa",
   "years": "anni",
   "months": "mesi",
   "days": "giorni",
   "hours": "ore"
 });
-delta = ago.delta(a_date, far_future);
+delta = timehaze.delta(a_date, far_future);
 console.log(delta.full());    // '669 anni, 6 mesi, 8 giorni, 3 ore fa'
 ```
 
