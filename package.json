@@ -1,5 +1,5 @@
 {
-  "name": "ago",
+  "name": "timehaze",
   "version": "0.0.1",
   "description": "Fuzzy timestamps for Node.js",
   "maintainers": [
@@ -10,15 +10,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "http://github.com/csparpa/ago.git"
+    "url": "http://github.com/csparpa/timehaze.git"
   },
   "bugs": {
-    "url": "http://github.com/csparpa/ago/issues"
+    "url": "http://github.com/csparpa/timehaze/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://github.com/csparpa/ago/raw/master/LICENSE"
+      "url": "http://github.com/csparpa/timehaze/raw/master/LICENSE"
     }
   ]
 }
