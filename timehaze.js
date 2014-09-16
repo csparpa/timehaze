@@ -1,5 +1,5 @@
 /**
-* Ago.js
+* Timehaze.js
 */
 
 /**
@@ -62,7 +62,7 @@ function Delta(from, to) {
 }
 
 /**
-* Ago properties
+* Timehaze properties
 */
 
 this.fuzzyLabels = {
@@ -96,7 +96,15 @@ this.fuzzyLabels = {
   "a few": "a few",
   "a lot": "a lot",
   "and": "and",
-  "at": "at"
+  "at": "at",
+  "about": "about",
+  "monday": "Monday",
+  "tuesday": "Tuesday",
+  "wednesday": "Wednesday",
+  "thursday": "Thursday",
+  "friday": "Friday",
+  "saturday": "Saturday",
+  "sunday": "Sunday"
 };
 
 this.mergeFuzzyLabels = function(newLabels){
