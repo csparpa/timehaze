@@ -14,40 +14,33 @@ var MONTH = DAY * 30.4166;  // 1 month = 365/12 days
 var YEAR = MONTH * 12;
 var DECADE = YEAR * 10;
 var CENTURY = DECADE * 10;
+var MILLENNIUM = CENTURY * 10;
 
 
 /**
 * Objects
 */
-function Delta(from, to) {
-  var a = from;
-  var b = (typeof to === "undefined") ? new Date() : to;
-  if (a < b){
-    this.from = a;
-    this.to = b;
-  }
-  else{
-    this.from = b;
-    this.to = a;
-  }
+function Delta(_timestamp, _comparison) {
+  this.timestamp = _timestamp;
+  this.comparison = (typeof _comparison === "undefined") ? new Date() : _comparison;
   
-  this.full =  function(){
-    console.log("Delta.full");
+  this.ago =  function(){
+    console.log("Delta.ago");
   };
   
-  this.mixed =  function(){
-    console.log("Delta.mixed");
+  this.interval =  function(){
+    console.log("Delta.interval");
   };
 
-  this.pretty =  function(){
-    console.log("Delta.pretty");
+  this.calendar =  function(){
+    console.log("Delta.calendar");
   };
   
   this.raw =  function(){
-    var secs = (this.to - this.from)/1000.0
+    var secs = (this.timestamp - this.comparison)/1000.0
     return JSON.stringify({
-      "from": this.from,
-      "to": this.to,
+      "timestamp": this.timestamp,
+      "comparison": this.comparison,
       "delta": {
         "centuries": secs/CENTURY,
         "decades": secs/DECADE,
@@ -67,6 +60,8 @@ function Delta(from, to) {
 
 this.fuzzyLabels = {
   "infinity": "infinity",
+  "millennia": "millennia",
+  "millennium": "millennium",
   "centuries": "centuries",
   "century": "century",
   "decades": "decades",
@@ -83,9 +78,10 @@ this.fuzzyLabels = {
   "minute": "minute",
   "seconds": "seconds",
   "second": "second",
-  "now": "now",
+  "now": "right now",
   "yesterday": "yesterday",
   "tomorrow": "tomorrow",
+  "half": "half",
   "ago": "ago",
   "in": "in",
   "last": "last",
@@ -104,24 +100,33 @@ this.fuzzyLabels = {
   "thursday": "Thursday",
   "friday": "Friday",
   "saturday": "Saturday",
-  "sunday": "Sunday"
-};
-
-this.mergeFuzzyLabels = function(newLabels){
-  for (var key in newLabels){
-    this.fuzzyLabels[key] = newLabels[key];
-  }
+  "sunday": "Sunday",
+  "january": "January",
+  "february": "February",
+  "march": "March",
+  "april": "April",
+  "may": "May",
+  "june": "June",
+  "july": "July",
+  "august": "August",
+  "september": "September",
+  "october": "October",
+  "november": "November",
+  "december": "December"
 };
 
 /**
 * Module exports
 */
-exports.delta = function(from, to) {
-  return new Delta(from, to);
+
+exports.delta = function(timestamp, comparison) {
+  return new Delta(timestamp, comparison);
 }
 
 exports.setFuzzyLabels = function(labels) {
-  this.mergeFuzzyLabels(labels);
+  for (var key in labels){
+    this.fuzzyLabels[key] = labels[key];
+  }
 }
 
 exports.getFuzzyLabels = function() {
