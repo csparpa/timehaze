@@ -20,37 +20,37 @@ var timehaze = require('timehaze');
 
 // Timedeltas between two timestamps
 delta = timehaze.delta(a_date, far_future);
-console.log(delta.pretty());    // 'In more than 500 years'
+console.log(delta.ago());    // 'In more than 500 years'
 
 // ... or with respect to current timestamp
 delta = timehaze.delta(close_past);
-console.log(delta.pretty());    // 'Yesterday'
+console.log(delta.interval());    // 'Last day'
 
 /**
 * Output control
 */
 
 // Tune output "beauty"
-console.log(delta.full());      // Sharp formatting: '669 years, 6 months, 8 days, 3 hours, 46 minutes, 6 seconds ago'
-console.log(delta.mixed());     // Human-readable but precise: 'More than 600 years ago'
-console.log(delta.pretty());    // Default formatting behaviour, very human-readable: 'More than 6 centuries ago'
+console.log(delta.ago());       // Human-readable, focusing on elapsed time: '1 day ago'
+console.log(delta.interval());  // Human-readable, focusing on time span: 'Last day'
+console.log(delta.calendar());  // Human-readable, focusing on calendar milestones: 'last Monday'
 
 // Get raw data, not strings
 values = delta.raw();
 console.log(values);    // {
-                        //   from: Date(2012, 0, 1, 8, 0, 0),
-                        //   to: Date(2567, 0, 18, 14, 1, 0),
+                        //   timestamp: Date(2012, 0, 1, 8, 0, 0),
+                        //   comparison: Date(2012, 0, 18, 14, 1, 0),
                         //   delta: {
                         //     "years": 0,
                         //     "months": 0,
-                        //     "days": 1,
+                        //     "days": 17,
                         //     "hours": 6,
                         //     "minutes": 35,
                         //     "seconds": 28
                         //   }
                         // }
 
-// Localise output
+// Setup custom labels for output localisation
 timehaze.setFuzzyLabels({
   "ago": "fa",
   "years": "anni",
@@ -59,7 +59,7 @@ timehaze.setFuzzyLabels({
   "hours": "ore"
 });
 delta = timehaze.delta(a_date, far_future);
-console.log(delta.full());    // '669 anni, 6 mesi, 8 giorni, 3 ore fa'
+console.log(delta.ago());    // '17 giorni fa'
 ```
 
 Notes
