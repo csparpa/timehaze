@@ -2,6 +2,10 @@
   "name": "timehaze",
   "version": "0.0.1",
   "description": "Fuzzy timestamps for Node.js",
+  "main": "timehaze.js",
+  "devDependencies": {
+    "jasmine-node": "~1.14.5"
+  },
   "maintainers": [
     {
       "name": "csparpa",
@@ -20,5 +24,8 @@
       "type": "MIT",
       "url": "http://github.com/csparpa/timehaze/raw/master/LICENSE"
     }
+  ],
+  "keywords": [
+    "fuzzy", "date", "timestamp", "human-friendly", "ago", "timeago"
   ]
 }
