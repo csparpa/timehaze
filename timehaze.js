@@ -108,9 +108,19 @@ function Delta(_timestamp, _comparison) {
       return output;
     }
 
-    //moments ago
+    //moments
     else if(Math.abs(dx) < 30){
       return timePrecedenceFor(dx, fuzzyLabels["moments"]);
+    }
+
+    //a minute
+    else if(Math.abs(dx) < 2*MINUTE){
+      return timePrecedenceFor(dx, "1 "+fuzzyLabels["minute"]);
+    }
+
+    //a few minutes
+    else if(Math.abs(dx) < 15*MINUTE){
+      return timePrecedenceFor(dx, fuzzyLabels["a few"]+" "+fuzzyLabels["minutes"]);
     }
 
   };
