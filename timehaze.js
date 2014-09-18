@@ -120,6 +120,12 @@ function Delta(_timestamp, _comparison) {
     else if(Math.abs(dx) < 60*MINUTE){  // almost an hour
       return timePrecedenceFor(dx, fuzzyLabels["almost"]+" 1 "+fuzzyLabels["hour"]);
     }
+
+
+
+    else{
+      throw new Error("Impossible to assign a fuzzy label");
+    }
   };
   
   this.interval =  function(){

@@ -2,6 +2,14 @@ describe("Timehaze.Delta.ago function", function() {
   var th = require('../timehaze.js');
   var res, comparison = new Date(2000, 0, 1, 0, 0, 0, 0);
 
+  it("should return plain date if no fuzzy label is available", function() {
+    var timestamp = new Date(9999999, 0, 1, 0, 0, 0, 0);
+    function throwingError(){
+      return th.delta(timestamp, comparison).ago();
+    };
+    expect(throwingError).toThrow();
+  });
+
   it("should return 'right now'", function() {
     var timestamp = new Date(2000, 0, 1, 0, 0, 5, 0);
     res = (th.delta(timestamp, comparison)).ago();
