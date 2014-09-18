@@ -100,6 +100,31 @@ describe("Timehaze.Delta.ago function", function() {
     expect(res).toBe("in a few hours");
   });
 
+  it("should return 'almost half a day ago'", function() {
+    var timestamp = new Date(2000, 0, 1, 10, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("almost half a day ago");
+  });
+
+  it("should return 'in almost half a day'", function() {
+    var timestamp = new Date(1999, 11, 31, 14, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in almost half a day");
+  });
+
+  it("should return 'half a day ago'", function() {
+    var timestamp = new Date(2000, 0, 1, 15, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("half a day ago");
+  });
+
+  it("should return 'in half a day'", function() {
+    var timestamp = new Date(1999, 11, 31, 9, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in half a day");
+  });
+
+
 });
 
 

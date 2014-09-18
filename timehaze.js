@@ -43,10 +43,12 @@ var fuzzyLabels = {
   "second": "second",
   "moments": "moments",
   "moment": "moment",
+  "a": "a",
+  "an": "an",
   "now": "right now",
   "yesterday": "yesterday",
   "tomorrow": "tomorrow",
-  "half": "half an",
+  "half": "half",
   "ago": "ago",
   "in": "in",
   "last": "last",
@@ -98,33 +100,40 @@ function Delta(_timestamp, _comparison) {
   
   this.ago =  function(){
     var dx = this.timestamp.getTime()/1000.0 - this.comparison.getTime()/1000.0;
+    var adx = Math.abs(dx);
     var output = "";
     
     // assign fuzzy labels
-    if(Math.abs(dx) < 10){  // now
+    if(adx < 10){  // now
       output += fuzzyLabels["now"];
       return output;
     }
-    else if(Math.abs(dx) < 30){  // moments
+    else if(adx < 30){  // moments
       return timePrecedenceFor(dx, fuzzyLabels["moments"]);
     }
-    else if(Math.abs(dx) < 2*MINUTE){ // 1 minute
+    else if(adx < 2*MINUTE){ // 1 minute
       return timePrecedenceFor(dx, "1 "+fuzzyLabels["minute"]);
     }
-    else if(Math.abs(dx) < 15*MINUTE){  // a few minutes
+    else if(adx < 15*MINUTE){  // a few minutes
       return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["minutes"]);
     }
-    else if(Math.abs(dx) < 45*MINUTE){  // half an hour
-      return timePrecedenceFor(dx, fuzzyLabels["half"]+" "+fuzzyLabels["hour"]);
+    else if(adx < 45*MINUTE){  // half an hour
+      return timePrecedenceFor(dx, fuzzyLabels["half"]+" "+fuzzyLabels["an"]+" "+fuzzyLabels["hour"]);
     }
-    else if(Math.abs(dx) < 60*MINUTE){  // almost an hour
+    else if(adx < 60*MINUTE){  // almost an hour
       return timePrecedenceFor(dx, fuzzyLabels["almost"]+" 1 "+fuzzyLabels["hour"]);
     }
-    else if(Math.abs(dx) < 2*HOUR){  // 1 hour
+    else if(adx < 2*HOUR){  // 1 hour
       return timePrecedenceFor(dx, "1 "+fuzzyLabels["hour"]);
     }
-    else if(Math.abs(dx) < 9*HOUR){  // a few hours ago
+    else if(adx < 9*HOUR){  // a few hours
       return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["hours"]);
+    }
+    else if(adx < 12*HOUR){  // almost half a day
+      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["half"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["day"]);
+    }
+    else if(adx < 18*HOUR){  // almost half a day
+      return timePrecedenceFor(dx, fuzzyLabels["half"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["day"]);
     }
 
 
