@@ -18,47 +18,10 @@ var MILLENNIUM = CENTURY * 10;
 
 
 /**
-* Objects
-*/
-function Delta(_timestamp, _comparison) {
-  this.timestamp = _timestamp;
-  this.comparison = (typeof _comparison === "undefined") ? new Date() : _comparison;
-  
-  this.ago =  function(){
-    console.log("Delta.ago");
-  };
-  
-  this.interval =  function(){
-    console.log("Delta.interval");
-  };
-
-  this.calendar =  function(){
-    console.log("Delta.calendar");
-  };
-  
-  this.raw =  function(){
-    var secs = (this.timestamp - this.comparison)/1000.0
-    return JSON.stringify({
-      "timestamp": this.timestamp,
-      "comparison": this.comparison,
-      "delta": {
-        "centuries": secs/CENTURY,
-        "decades": secs/DECADE,
-        "years": secs/YEAR,
-        "month": secs/MONTH,
-        "days": secs/DAY,
-        "hours": secs/HOUR,
-        "minutes": secs/MINUTE,
-        "seconds": secs
-      }});
-  };
-}
-
-/**
-* Timehaze properties
+* Properties
 */
 
-this.fuzzyLabels = {
+var fuzzyLabels = {
   "infinity": "infinity",
   "millennia": "millennia",
   "millennium": "millennium",
@@ -78,6 +41,8 @@ this.fuzzyLabels = {
   "minute": "minute",
   "seconds": "seconds",
   "second": "second",
+  "moments": "moments",
+  "moment": "moment",
   "now": "right now",
   "yesterday": "yesterday",
   "tomorrow": "tomorrow",
@@ -114,6 +79,67 @@ this.fuzzyLabels = {
   "november": "November",
   "december": "December"
 };
+this.fuzzyLabels = fuzzyLabels;
+
+
+/**
+* Objects
+*/
+function Delta(_timestamp, _comparison) {
+  this.timestamp = _timestamp;
+  this.comparison = (typeof _comparison === "undefined") ? new Date() : _comparison;
+
+  function timePrecedenceFor(timedelta, fuzzyLabel){
+    if(timedelta > 0){
+      return fuzzyLabel + " " + fuzzyLabels["ago"];
+    }
+    return fuzzyLabels["in"] + " " + fuzzyLabel;
+  }
+  
+  this.ago =  function(){
+    var dx = this.timestamp.getTime()/1000.0 - this.comparison.getTime()/1000.0;
+    var output = "";
+    
+    // assign fuzzy labels
+
+    //now
+    if(Math.abs(dx) < 10){
+      output += fuzzyLabels["now"];
+      return output;
+    }
+
+    //moments ago
+    else if(Math.abs(dx) < 30){
+      return timePrecedenceFor(dx, fuzzyLabels["moments"]);
+    }
+
+  };
+  
+  this.interval =  function(){
+    console.log("Delta.interval");
+  };
+
+  this.calendar =  function(){
+    console.log("Delta.calendar");
+  };
+  
+  this.raw =  function(){
+    var secs = (this.timestamp - this.comparison)/1000.0
+    return JSON.stringify({
+      "timestamp": this.timestamp,
+      "comparison": this.comparison,
+      "delta": {
+        "centuries": secs/CENTURY,
+        "decades": secs/DECADE,
+        "years": secs/YEAR,
+        "month": secs/MONTH,
+        "days": secs/DAY,
+        "hours": secs/HOUR,
+        "minutes": secs/MINUTE,
+        "seconds": secs
+      }});
+  };
+}
 
 /**
 * Module exports
