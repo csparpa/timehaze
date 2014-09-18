@@ -124,6 +124,29 @@ describe("Timehaze.Delta.ago function", function() {
     expect(res).toBe("in half a day");
   });
 
+  it("should return 'a day ago'", function() {
+    var timestamp = new Date(2000, 0, 2, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("a day ago");
+  });
+
+  it("should return 'in a day'", function() {
+    var timestamp = new Date(1999, 11, 31, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in a day");
+  });
+
+  it("should return 'a few days ago'", function() {
+    var timestamp = new Date(2000, 0, 4, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("a few days ago");
+  });
+
+  it("should return 'in a few days'", function() {
+    var timestamp = new Date(1999, 11, 28, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in a few days");
+  });
 
 });
 

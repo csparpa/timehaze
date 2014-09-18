@@ -132,8 +132,14 @@ function Delta(_timestamp, _comparison) {
     else if(adx < 12*HOUR){  // almost half a day
       return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["half"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["day"]);
     }
-    else if(adx < 18*HOUR){  // almost half a day
+    else if(adx < 18*HOUR){  // half a day
       return timePrecedenceFor(dx, fuzzyLabels["half"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["day"]);
+    }
+    else if(adx < 2*DAY){  // a day
+      return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["day"]);
+    }
+    else if(adx < 5*DAY){  // a few days
+      return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["days"]);
     }
 
 
