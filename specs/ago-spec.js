@@ -148,6 +148,30 @@ describe("Timehaze.Delta.ago function", function() {
     expect(res).toBe("in a few days");
   });
 
+  it("should return 'almost a week ago'", function() {
+    var timestamp = new Date(2000, 0, 6, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("almost a week ago");
+  });
+
+  it("should return 'in almost a week'", function() {
+    var timestamp = new Date(1999, 11, 26, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in almost a week");
+  });
+
+  it("should return 'a week ago'", function() {
+    var timestamp = new Date(2000, 0, 10, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("a week ago");
+  });
+
+  it("should return 'in a week'", function() {
+    var timestamp = new Date(1999, 11, 21, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in a week");
+  });
+
 });
 
 

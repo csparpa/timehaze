@@ -33,6 +33,7 @@ var fuzzyLabels = {
   "year": "year",
   "months": "months",
   "month": "month",
+  "week": "week",
   "days": "days",
   "day": "day",
   "hours": "hours",
@@ -141,7 +142,12 @@ function Delta(_timestamp, _comparison) {
     else if(adx < 5*DAY){  // a few days
       return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["days"]);
     }
-
+    else if(adx < 7*DAY){  // almost a week
+      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["week"]);
+    }
+    else if(adx < 14*DAY){  // a week
+      return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["week"]);
+    }
 
     else{
       throw new Error("Impossible to assign a fuzzy label");
