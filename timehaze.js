@@ -108,7 +108,7 @@ function Delta(_timestamp, _comparison) {
     else if(Math.abs(dx) < 30){  // moments
       return timePrecedenceFor(dx, fuzzyLabels["moments"]);
     }
-    else if(Math.abs(dx) < 2*MINUTE){ // a minute
+    else if(Math.abs(dx) < 2*MINUTE){ // 1 minute
       return timePrecedenceFor(dx, "1 "+fuzzyLabels["minute"]);
     }
     else if(Math.abs(dx) < 15*MINUTE){  // a few minutes
@@ -120,7 +120,12 @@ function Delta(_timestamp, _comparison) {
     else if(Math.abs(dx) < 60*MINUTE){  // almost an hour
       return timePrecedenceFor(dx, fuzzyLabels["almost"]+" 1 "+fuzzyLabels["hour"]);
     }
-
+    else if(Math.abs(dx) < 2*HOUR){  // 1 hour
+      return timePrecedenceFor(dx, "1 "+fuzzyLabels["hour"]);
+    }
+    else if(Math.abs(dx) < 9*HOUR){  // a few hours ago
+      return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["hours"]);
+    }
 
 
     else{
