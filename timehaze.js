@@ -46,7 +46,7 @@ var fuzzyLabels = {
   "now": "right now",
   "yesterday": "yesterday",
   "tomorrow": "tomorrow",
-  "half": "half",
+  "half": "half an",
   "ago": "ago",
   "in": "in",
   "last": "last",
@@ -54,11 +54,11 @@ var fuzzyLabels = {
   "less": "less",
   "more": "more",
   "than": "than",
-  "a few": "a few",
-  "a lot": "a lot",
+  "few": "a few",
+  "lot": "a lot",
   "and": "and",
   "at": "at",
-  "about": "about",
+  "almost": "almost",
   "monday": "Monday",
   "tuesday": "Tuesday",
   "wednesday": "Wednesday",
@@ -101,28 +101,25 @@ function Delta(_timestamp, _comparison) {
     var output = "";
     
     // assign fuzzy labels
-
-    //now
-    if(Math.abs(dx) < 10){
+    if(Math.abs(dx) < 10){  // now
       output += fuzzyLabels["now"];
       return output;
     }
-
-    //moments
-    else if(Math.abs(dx) < 30){
+    else if(Math.abs(dx) < 30){  // moments
       return timePrecedenceFor(dx, fuzzyLabels["moments"]);
     }
-
-    //a minute
-    else if(Math.abs(dx) < 2*MINUTE){
+    else if(Math.abs(dx) < 2*MINUTE){ // a minute
       return timePrecedenceFor(dx, "1 "+fuzzyLabels["minute"]);
     }
-
-    //a few minutes
-    else if(Math.abs(dx) < 15*MINUTE){
-      return timePrecedenceFor(dx, fuzzyLabels["a few"]+" "+fuzzyLabels["minutes"]);
+    else if(Math.abs(dx) < 15*MINUTE){  // a few minutes
+      return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["minutes"]);
     }
-
+    else if(Math.abs(dx) < 45*MINUTE){  // half an hour
+      return timePrecedenceFor(dx, fuzzyLabels["half"]+" "+fuzzyLabels["hour"]);
+    }
+    else if(Math.abs(dx) < 60*MINUTE){  // almost an hour
+      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" 1 "+fuzzyLabels["hour"]);
+    }
   };
   
   this.interval =  function(){

@@ -44,6 +44,30 @@ describe("Timehaze.Delta.ago function", function() {
     expect(res).toBe("in a few minutes");
   });
 
+  it("should return 'half an hour ago'", function() {
+    var timestamp = new Date(2000, 0, 1, 0, 30, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("half an hour ago");
+  });
+
+  it("should return 'in half an hour'", function() {
+    var timestamp = new Date(1999, 11, 31, 23, 30, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in half an hour");
+  });
+
+  it("should return 'almost 1 hour ago'", function() {
+    var timestamp = new Date(2000, 0, 1, 0, 45, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("almost 1 hour ago");
+  });
+
+  it("should return 'in almost 1 hour'", function() {
+    var timestamp = new Date(1999, 11, 31, 23, 15, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in almost 1 hour");
+  });
+
 });
 
 
