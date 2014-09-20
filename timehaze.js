@@ -113,8 +113,8 @@ function Delta(_timestamp, _comparison) {
     else if(adx < 30){  // moments
       return timePrecedenceFor(dx, fuzzyLabels["moments"]);
     }
-    else if(adx < 2*MINUTE){ // 1 minute
-      return timePrecedenceFor(dx, "1 "+fuzzyLabels["minute"]);
+    else if(adx < 2*MINUTE){ // a minute
+      return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["minute"]);
     }
     else if(adx < 15*MINUTE){  // a few minutes
       return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["minutes"]);
@@ -123,10 +123,10 @@ function Delta(_timestamp, _comparison) {
       return timePrecedenceFor(dx, fuzzyLabels["half"]+" "+fuzzyLabels["an"]+" "+fuzzyLabels["hour"]);
     }
     else if(adx < 60*MINUTE){  // almost an hour
-      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" 1 "+fuzzyLabels["hour"]);
+      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["an"]+" "+fuzzyLabels["hour"]);
     }
-    else if(adx < 2*HOUR){  // 1 hour
-      return timePrecedenceFor(dx, "1 "+fuzzyLabels["hour"]);
+    else if(adx < 2*HOUR){  // an hour
+      return timePrecedenceFor(dx, fuzzyLabels["an"]+" "+fuzzyLabels["hour"]);
     }
     else if(adx < 9*HOUR){  // a few hours
       return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["hours"]);
@@ -152,8 +152,8 @@ function Delta(_timestamp, _comparison) {
     else if(adx < 21*DAY){  // a few weeks
       return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["weeks"]);
     }
-    else if(adx < MONTH){  // almost 1 month
-      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" 1 "+fuzzyLabels["month"]);
+    else if(adx < MONTH){  // almost a month
+      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["month"]);
     }
     else if(adx < 2*MONTH){  // a month
       return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["month"]);
@@ -161,17 +161,17 @@ function Delta(_timestamp, _comparison) {
     else if(adx < 9*MONTH){  // a few months
       return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["months"]);
     }
-    else if(adx < YEAR){  // almost 1 year
-      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" 1 "+fuzzyLabels["year"]);
+    else if(adx < YEAR){  // almost a year
+      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["year"]);
     }
-    else if(adx < 2*YEAR){  // 1 year
-      return timePrecedenceFor(dx, "1 "+fuzzyLabels["year"]);
+    else if(adx < 2*YEAR){  // a year
+      return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["year"]);
     }
-    else if(adx < 8*YEAR){  // 1 year
+    else if(adx < 8*YEAR){  // a few years
       return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["years"]);
     }
-    else if(adx < DECADE){  // almost 1 decade
-      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" 1 "+fuzzyLabels["decade"]);
+    else if(adx < DECADE){  // almost a decade
+      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["decade"]);
     }
 
     else{

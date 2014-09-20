@@ -28,16 +28,16 @@ describe("Timehaze.Delta.ago function", function() {
     expect(res).toBe("in moments");
   });
 
-  it("should return '1 minute ago'", function() {
+  it("should return 'a minute ago'", function() {
     var timestamp = new Date(2000, 0, 1, 0, 1, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("1 minute ago");
+    expect(res).toBe("a minute ago");
   });
 
-  it("should return 'in 1 minute'", function() {
+  it("should return 'in a minute'", function() {
     var timestamp = new Date(1999, 11, 31, 23, 59, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("in 1 minute");
+    expect(res).toBe("in a minute");
   });
 
   it("should return 'a few minutes ago'", function() {
@@ -64,28 +64,28 @@ describe("Timehaze.Delta.ago function", function() {
     expect(res).toBe("in half an hour");
   });
 
-  it("should return 'almost 1 hour ago'", function() {
+  it("should return 'almost an hour ago'", function() {
     var timestamp = new Date(2000, 0, 1, 0, 45, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("almost 1 hour ago");
+    expect(res).toBe("almost an hour ago");
   });
 
-  it("should return 'in almost 1 hour'", function() {
+  it("should return 'in almost an hour'", function() {
     var timestamp = new Date(1999, 11, 31, 23, 15, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("in almost 1 hour");
+    expect(res).toBe("in almost an hour");
   });
 
-  it("should return '1 hour ago'", function() {
+  it("should return 'an hour ago'", function() {
     var timestamp = new Date(2000, 0, 1, 1, 0, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("1 hour ago");
+    expect(res).toBe("an hour ago");
   });
 
-  it("should return 'in 1 hour'", function() {
+  it("should return 'in an hour'", function() {
     var timestamp = new Date(1999, 11, 31, 23, 0, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("in 1 hour");
+    expect(res).toBe("in an hour");
   });
 
   it("should return 'a few hours ago'", function() {
@@ -184,28 +184,28 @@ describe("Timehaze.Delta.ago function", function() {
     expect(res).toBe("in a few weeks");
   });
 
-  it("should return 'almost 1 month ago'", function() {
+  it("should return 'almost a month ago'", function() {
     var timestamp = new Date(2000, 0, 25, 0, 0, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("almost 1 month ago");
+    expect(res).toBe("almost a month ago");
   });
 
-  it("should return 'in almost 1 month'", function() {
+  it("should return 'in almost a month'", function() {
     var timestamp = new Date(1999, 11, 6, 0, 0, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("in almost 1 month");
+    expect(res).toBe("in almost a month");
   });
 
-  it("should return '1 month ago'", function() {
+  it("should return 'a month ago'", function() {
     var timestamp = new Date(2000, 1, 10, 0, 0, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("1 month ago");
+    expect(res).toBe("a month ago");
   });
 
-  it("should return 'in 1 month'", function() {
+  it("should return 'in a month'", function() {
     var timestamp = new Date(1999, 10, 10, 0, 0, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("in 1 month");
+    expect(res).toBe("in a month");
   });
 
   it("should return 'a few months ago'", function() {
@@ -220,28 +220,28 @@ describe("Timehaze.Delta.ago function", function() {
     expect(res).toBe("in a few months");
   });
 
-  it("should return 'almost 1 year ago'", function() {
+  it("should return 'almost a year ago'", function() {
     var timestamp = new Date(2000, 10, 10, 0, 0, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("almost 1 year ago");
+    expect(res).toBe("almost a year ago");
   });
 
-  it("should return 'in almost 1 year'", function() {
+  it("should return 'in almost a year'", function() {
     var timestamp = new Date(1999, 1, 10, 0, 0, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("in almost 1 year");
+    expect(res).toBe("in almost a year");
   });
 
-  it("should return '1 year ago'", function() {
+  it("should return 'a year ago'", function() {
     var timestamp = new Date(2001, 1, 1, 0, 0, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("1 year ago");
+    expect(res).toBe("a year ago");
   });
 
-  it("should return 'in 1 year'", function() {
+  it("should return 'in a year'", function() {
     var timestamp = new Date(1998, 11, 1, 0, 0, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("in 1 year");
+    expect(res).toBe("in a year");
   });
 
   it("should return 'a few years ago'", function() {
@@ -256,16 +256,16 @@ describe("Timehaze.Delta.ago function", function() {
     expect(res).toBe("in a few years");
   });
 
-  it("should return 'almost 1 decade ago'", function() {
+  it("should return 'almost a decade ago'", function() {
     var timestamp = new Date(2009, 1, 1, 0, 0, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("almost 1 decade ago");
+    expect(res).toBe("almost a decade ago");
   });
 
-  it("should return 'in almost 1 decade'", function() {
+  it("should return 'in almost a decade'", function() {
     var timestamp = new Date(1991, 11, 1, 0, 0, 0, 0);
     res = (th.delta(timestamp, comparison)).ago();
-    expect(res).toBe("in almost 1 decade");
+    expect(res).toBe("in almost a decade");
   });
 
 });
