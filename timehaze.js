@@ -158,7 +158,21 @@ function Delta(_timestamp, _comparison) {
     else if(adx < 2*MONTH){  // 1 month
       return timePrecedenceFor(dx, "1 "+fuzzyLabels["month"]);
     }
-
+    else if(adx < 9*MONTH){  // a few months
+      return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["months"]);
+    }
+    else if(adx < YEAR){  // almost 1 year
+      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" 1 "+fuzzyLabels["year"]);
+    }
+    else if(adx < 2*YEAR){  // 1 year
+      return timePrecedenceFor(dx, "1 "+fuzzyLabels["year"]);
+    }
+    else if(adx < 8*YEAR){  // 1 year
+      return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["years"]);
+    }
+    else if(adx < DECADE){  // almost 1 decade
+      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" 1 "+fuzzyLabels["decade"]);
+    }
 
     else{
       throw new Error("Impossible to assign a fuzzy label");

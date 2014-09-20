@@ -208,6 +208,66 @@ describe("Timehaze.Delta.ago function", function() {
     expect(res).toBe("in 1 month");
   });
 
+  it("should return 'a few months ago'", function() {
+    var timestamp = new Date(2000, 3, 10, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("a few months ago");
+  });
+
+  it("should return 'in a few months'", function() {
+    var timestamp = new Date(1999, 9, 10, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in a few months");
+  });
+
+  it("should return 'almost 1 year ago'", function() {
+    var timestamp = new Date(2000, 10, 10, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("almost 1 year ago");
+  });
+
+  it("should return 'in almost 1 year'", function() {
+    var timestamp = new Date(1999, 1, 10, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in almost 1 year");
+  });
+
+  it("should return '1 year ago'", function() {
+    var timestamp = new Date(2001, 1, 1, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("1 year ago");
+  });
+
+  it("should return 'in 1 year'", function() {
+    var timestamp = new Date(1998, 11, 1, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in 1 year");
+  });
+
+  it("should return 'a few years ago'", function() {
+    var timestamp = new Date(2005, 1, 1, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("a few years ago");
+  });
+
+  it("should return 'in a few years'", function() {
+    var timestamp = new Date(1995, 11, 1, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in a few years");
+  });
+
+  it("should return 'almost 1 decade ago'", function() {
+    var timestamp = new Date(2009, 1, 1, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("almost 1 decade ago");
+  });
+
+  it("should return 'in almost 1 decade'", function() {
+    var timestamp = new Date(1991, 11, 1, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in almost 1 decade");
+  });
+
 });
 
 
