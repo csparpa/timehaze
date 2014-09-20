@@ -13,8 +13,6 @@ var DAY = HOUR * 24;
 var MONTH = DAY * 30.4166;  // 1 month = 365/12 days
 var YEAR = MONTH * 12;
 var DECADE = YEAR * 10;
-var CENTURY = DECADE * 10;
-var MILLENNIUM = CENTURY * 10;
 
 
 /**
@@ -59,7 +57,7 @@ var fuzzyLabels = {
   "more": "more",
   "than": "than",
   "few": "a few",
-  "lot": "a lot",
+  "long": "a long time",
   "and": "and",
   "at": "at",
   "almost": "almost",
@@ -173,7 +171,12 @@ function Delta(_timestamp, _comparison) {
     else if(adx < DECADE){  // almost a decade
       return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["decade"]);
     }
-
+    else if(adx < 2*DECADE){  // almost a decade
+      return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["decade"]);
+    }
+    else if(adx >= 2*DECADE){  // a long time
+      return timePrecedenceFor(dx, fuzzyLabels["long"]);
+    }
     else{
       throw new Error("Impossible to assign a fuzzy label");
     }

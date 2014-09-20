@@ -268,6 +268,30 @@ describe("Timehaze.Delta.ago function", function() {
     expect(res).toBe("in almost a decade");
   });
 
+  it("should return 'a decade ago'", function() {
+    var timestamp = new Date(2011, 2, 1, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("a decade ago");
+  });
+
+  it("should return 'in a decade'", function() {
+    var timestamp = new Date(1989, 2, 1, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in a decade");
+  });
+
+  it("should return 'a long time ago' for very big timedeltas", function() {
+    var timestamp = new Date(2050, 2, 1, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("a long time ago");
+  });
+
+  it("should return 'in a long time' for very big timedeltas", function() {
+    var timestamp = new Date(1930, 2, 1, 0, 0, 0, 0);
+    res = (th.delta(timestamp, comparison)).ago();
+    expect(res).toBe("in a long time");
+  });
+
 });
 
 
