@@ -7,7 +7,7 @@ Usage examples
 --------------
 ```javascript
 
-a_date = new Date(2012, 0, 1, 8, 0, 0);
+event = new Date(2012, 0, 1, 8, 0, 0);
 far_future = new Date(2567, 0, 18, 14, 1, 0);
 close_past = new Date(2014, 8, 14, 21, 10, 24);
 
@@ -19,7 +19,7 @@ var timehaze = require('timehaze');
 */
 
 // Timedeltas between two timestamps
-delta = timehaze.delta(a_date, far_future);
+var delta = timehaze.delta(event, far_future);
 console.log(delta.ago());    // 'In more than 500 years'
 
 // ... or with respect to current timestamp
@@ -27,7 +27,19 @@ delta = timehaze.delta(close_past);
 console.log(delta.interval());    // 'Last day'
 
 /**
-* Output control
+* Control automatic update of timedeltas
+*/
+
+// By default, automatic timedeltas update is off
+var evolving_delta = timehaze.delta(close_past, true);
+timehaze.update(1500);  // Update all evolving timedeltas every 2000 millis (default is 1000)
+setInterval(function(){  // print fuzzy timestamp every second and check it gets updated
+  console.log(evolving_delta.ago());
+}, 1000); 
+
+
+/**
+* Control output formatting
 */
 
 // Tune output "beauty"
@@ -58,7 +70,7 @@ timehaze.setFuzzyLabels({
   "days": "giorni",
   "hours": "ore"
 });
-delta = timehaze.delta(a_date, far_future);
+delta = timehaze.delta(event, far_future);
 console.log(delta.ago());    // '17 giorni fa'
 ```
 

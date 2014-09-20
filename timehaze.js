@@ -2,6 +2,14 @@
 * Timehaze.js
 */
 
+
+/**
+* Import modules
+*/
+var events = require('events');
+var emitter = new events.EventEmitter();
+emitter.setMaxListeners(0);
+
 /**
 * Constants
 */
@@ -15,10 +23,10 @@ var YEAR = MONTH * 12;
 var DECADE = YEAR * 10;
 
 
-/**
-* Properties
-*/
+// Update timedeltas every milliseconds..
+var updateMillis = 1000;
 
+// Use these labels for fuzzy timestamps formatting
 var fuzzyLabels = {
   "infinity": "infinity",
   "millennia": "millennia",
@@ -81,15 +89,52 @@ var fuzzyLabels = {
   "november": "November",
   "december": "December"
 };
-this.fuzzyLabels = fuzzyLabels;
 
+
+/**
+* Properties
+*/
+
+this.fuzzyLabels = fuzzyLabels;
+this.updateMillis = updateMillis;
+
+this.interval = setInterval(function(){
+  emitter.emit('updateFuzzyTimestamp');
+}, this.updateMillis);
 
 /**
 * Objects
 */
-function Delta(_timestamp, _comparison) {
-  this.timestamp = _timestamp;
-  this.comparison = (typeof _comparison === "undefined") ? new Date() : _comparison;
+function Delta(_eventDate, _timestamp, _updatable) {
+
+  var eventDate = _eventDate;  // pivot date
+  var updatable = false;
+  var timestamp = new Date();
+
+  if (typeof _timestamp === "object") {
+    if (typeof _updatable === "boolean") {
+      updatable = _updatable;
+    }
+    timestamp = _timestamp;
+  }
+  else {
+    if (typeof _timestamp === "boolean") {
+      updatable = Boolean(_timestamp);
+    }
+    else {
+      throw new Error("Wrong arguments");
+    }
+  }
+
+  emitter.on('updateFuzzyTimestamp', function() {
+    if(updatable) {
+      timestamp = new Date();
+    }
+  });
+
+  this.updatable = function(value) {
+    updatable = value;
+  }
 
   function timePrecedenceFor(timedelta, fuzzyLabel){
     if(timedelta > 0){
@@ -99,7 +144,7 @@ function Delta(_timestamp, _comparison) {
   }
   
   this.ago =  function(){
-    var dx = this.timestamp.getTime()/1000.0 - this.comparison.getTime()/1000.0;
+    var dx = timestamp.getTime()/1000.0 - eventDate.getTime()/1000.0;
     var adx = Math.abs(dx);
     var output = "";
     
@@ -191,10 +236,10 @@ function Delta(_timestamp, _comparison) {
   };
   
   this.raw =  function(){
-    var secs = (this.timestamp - this.comparison)/1000.0
+    var secs = (timestamp - eventDate)/1000.0
     return JSON.stringify({
-      "timestamp": this.timestamp,
-      "comparison": this.comparison,
+      "eventDate": eventDate,
+      "timestamp": timestamp,
       "delta": {
         "centuries": secs/CENTURY,
         "decades": secs/DECADE,
@@ -212,8 +257,16 @@ function Delta(_timestamp, _comparison) {
 * Module exports
 */
 
-exports.delta = function(timestamp, comparison) {
-  return new Delta(timestamp, comparison);
+exports.delta = function(eventDate, timestamp, updatable) {
+  return new Delta(eventDate, timestamp, updatable);
+}
+
+exports.update = function(how_many_millis) {
+  this.updateMillis = how_many_millis;
+  clearInterval(this.interval);
+  this.interval = setInterval(function(){
+      emitter.emit('updateFuzzyTimestamp');
+    }, this.updateMillis);
 }
 
 exports.setFuzzyLabels = function(labels) {
