@@ -155,8 +155,8 @@ function Delta(_timestamp, _comparison) {
     else if(adx < MONTH){  // almost 1 month
       return timePrecedenceFor(dx, fuzzyLabels["almost"]+" 1 "+fuzzyLabels["month"]);
     }
-    else if(adx < 2*MONTH){  // 1 month
-      return timePrecedenceFor(dx, "1 "+fuzzyLabels["month"]);
+    else if(adx < 2*MONTH){  // a month
+      return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["month"]);
     }
     else if(adx < 9*MONTH){  // a few months
       return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["months"]);
