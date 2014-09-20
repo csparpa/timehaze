@@ -152,6 +152,12 @@ function Delta(_timestamp, _comparison) {
     else if(adx < 21*DAY){  // a few weeks
       return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["weeks"]);
     }
+    else if(adx < MONTH){  // almost 1 month
+      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" 1 "+fuzzyLabels["month"]);
+    }
+    else if(adx < 2*MONTH){  // 1 month
+      return timePrecedenceFor(dx, "1 "+fuzzyLabels["month"]);
+    }
 
 
     else{
