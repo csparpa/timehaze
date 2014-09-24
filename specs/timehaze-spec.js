@@ -13,4 +13,6 @@ describe("Timehaze module", function() {
       done();
     }, 3000);
   });
+
+  clearInterval(th.interval);
 });
