@@ -33,4 +33,16 @@ describe("Delta objects", function(done) {
       done();
       }, 3000);
   });
+
+  it("should be updatable at a custom frequency", function(done) {
+    th.update(2000);
+    var dx = th.delta(evt, ts, true);
+    var old = dx.ago();
+    var updated;
+    setTimeout(function(){
+      updated = dx.ago();
+      expect(updated).not.toBe(old);
+      done();
+      }, 3000);
+  });
 });
