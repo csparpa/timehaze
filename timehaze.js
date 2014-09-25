@@ -6,8 +6,7 @@
 /**
 * Import modules
 */
-var events = require('events');
-var emitter = new events.EventEmitter();
+var emitter = new (require('events').EventEmitter)()
 emitter.setMaxListeners(0);
 
 /**
@@ -262,12 +261,18 @@ exports.delta = function(eventDate, timestamp, updatable) {
 }
 
 exports.update = function(how_many_millis) {
-  this.updateMillis = how_many_millis;
+  if(typeof how_many_millis !== "undefined"){
+    this.updateMillis = how_many_millis;
+  }
   clearInterval(this.interval);
   this.interval = setInterval(function(){
       emitter.emit('updateFuzzyTimestamp');
     }, this.updateMillis);
 }
+
+exports.stopUpdate = function(){
+  clearInterval(this.interval);
+};
 
 exports.setFuzzyLabels = function(labels) {
   for (var key in labels){
