@@ -3,9 +3,23 @@ Timehaze
 
 Fuzzy timestamps for Node.js
 
+Install
+-------
+For the moment:
+
+```bash
+git clone git@github.com:csparpa/timehaze.git
+```
+
+but it will be soon avaliable on `npm`:
+
+```bash
+npm install timehaze  # coming soon!
+```
+
 Usage examples
 --------------
-```javascript
+```js
 
 event = new Date(2012, 0, 1, 8, 0, 0);
 far_future = new Date(2567, 0, 18, 14, 1, 0);
@@ -73,6 +87,14 @@ timehaze.setFuzzyLabels({
 delta = timehaze.delta(event, far_future);
 console.log(delta.ago());    // '17 giorni fa'
 ```
+
+License
+-------
+MIT license
+
+Docs
+----
+Please take a look at the [wiki](https://github.com/csparpa/timehaze/wiki)
 
 Notes
 -----
