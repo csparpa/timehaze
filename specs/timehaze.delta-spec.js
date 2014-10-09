@@ -23,7 +23,7 @@ describe("Delta objects", function(done) {
       }, 3000);
   });
 
-  it("should be updatable", function(done) {
+  it("should be updatable if specified in the constructor", function(done) {
     var dx = th.delta(evt, ts, true);
     var old = dx.ago();
     var updated;
@@ -31,6 +31,18 @@ describe("Delta objects", function(done) {
       updated = dx.ago();
       expect(updated).not.toBe(old);
       done();
+      }, 3000);
+  });
+
+  it("should be updatable if specified after construction", function(done) {
+      var dx = th.delta(evt, ts);
+      dx.updatable(true);
+      var old = dx.ago();
+      var updated;
+      setTimeout(function(){
+          updated = dx.ago();
+          expect(updated).not.toBe(old);
+          done();
       }, 3000);
   });
 
