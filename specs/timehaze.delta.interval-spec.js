@@ -109,7 +109,7 @@ describe("Timehaze.Delta.interval function", function() {
     it("should return 'next hours' again", function() {
         var timestamp = new Date(1999, 11, 31, 14, 0, 0, 0);
         res = (th.delta(eventDate, timestamp)).interval();
-        expect(res).toBe("last hours");
+        expect(res).toBe("next hours");
     });
 
     it("should return 'last hours' once again", function() {

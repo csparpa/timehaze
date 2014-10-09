@@ -135,11 +135,18 @@ function Delta(_eventDate, _timestamp, _updatable) {
     updatable = value;
   }
 
-  function timePrecedenceFor(timedelta, fuzzyLabel){
+  function turnToAgoFormat(timedelta, fuzzyLabel){
     if(timedelta > 0){
       return fuzzyLabel + " " + fuzzyLabels["ago"];
     }
     return fuzzyLabels["in"] + " " + fuzzyLabel;
+  }
+
+  function turnToIntervalFormat(timedelta, fuzzyLabel){
+    if(timedelta > 0){
+      return fuzzyLabels["last"] + " " + fuzzyLabel;
+    }
+    return fuzzyLabels["next"] + " " + fuzzyLabel;
   }
   
   this.ago =  function(){
@@ -153,73 +160,73 @@ function Delta(_eventDate, _timestamp, _updatable) {
       return output;
     }
     else if(adx < 30){  // moments
-      return timePrecedenceFor(dx, fuzzyLabels["moments"]);
+      return turnToAgoFormat(dx, fuzzyLabels["moments"]);
     }
     else if(adx < 2*MINUTE){ // a minute
-      return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["minute"]);
+      return turnToAgoFormat(dx, fuzzyLabels["a"]+" "+fuzzyLabels["minute"]);
     }
     else if(adx < 15*MINUTE){  // a few minutes
-      return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["minutes"]);
+      return turnToAgoFormat(dx, fuzzyLabels["few"]+" "+fuzzyLabels["minutes"]);
     }
     else if(adx < 45*MINUTE){  // half an hour
-      return timePrecedenceFor(dx, fuzzyLabels["half"]+" "+fuzzyLabels["an"]+" "+fuzzyLabels["hour"]);
+      return turnToAgoFormat(dx, fuzzyLabels["half"]+" "+fuzzyLabels["an"]+" "+fuzzyLabels["hour"]);
     }
     else if(adx < 60*MINUTE){  // almost an hour
-      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["an"]+" "+fuzzyLabels["hour"]);
+      return turnToAgoFormat(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["an"]+" "+fuzzyLabels["hour"]);
     }
     else if(adx < 2*HOUR){  // an hour
-      return timePrecedenceFor(dx, fuzzyLabels["an"]+" "+fuzzyLabels["hour"]);
+      return turnToAgoFormat(dx, fuzzyLabels["an"]+" "+fuzzyLabels["hour"]);
     }
     else if(adx < 9*HOUR){  // a few hours
-      return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["hours"]);
+      return turnToAgoFormat(dx, fuzzyLabels["few"]+" "+fuzzyLabels["hours"]);
     }
     else if(adx < 12*HOUR){  // almost half a day
-      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["half"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["day"]);
+      return turnToAgoFormat(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["half"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["day"]);
     }
     else if(adx < 18*HOUR){  // half a day
-      return timePrecedenceFor(dx, fuzzyLabels["half"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["day"]);
+      return turnToAgoFormat(dx, fuzzyLabels["half"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["day"]);
     }
     else if(adx < 2*DAY){  // a day
-      return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["day"]);
+      return turnToAgoFormat(dx, fuzzyLabels["a"]+" "+fuzzyLabels["day"]);
     }
     else if(adx < 5*DAY){  // a few days
-      return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["days"]);
+      return turnToAgoFormat(dx, fuzzyLabels["few"]+" "+fuzzyLabels["days"]);
     }
     else if(adx < 7*DAY){  // almost a week
-      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["week"]);
+      return turnToAgoFormat(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["week"]);
     }
     else if(adx < 14*DAY){  // a week
-      return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["week"]);
+      return turnToAgoFormat(dx, fuzzyLabels["a"]+" "+fuzzyLabels["week"]);
     }
     else if(adx < 21*DAY){  // a few weeks
-      return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["weeks"]);
+      return turnToAgoFormat(dx, fuzzyLabels["few"]+" "+fuzzyLabels["weeks"]);
     }
     else if(adx < MONTH){  // almost a month
-      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["month"]);
+      return turnToAgoFormat(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["month"]);
     }
     else if(adx < 2*MONTH){  // a month
-      return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["month"]);
+      return turnToAgoFormat(dx, fuzzyLabels["a"]+" "+fuzzyLabels["month"]);
     }
     else if(adx < 9*MONTH){  // a few months
-      return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["months"]);
+      return turnToAgoFormat(dx, fuzzyLabels["few"]+" "+fuzzyLabels["months"]);
     }
     else if(adx < YEAR){  // almost a year
-      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["year"]);
+      return turnToAgoFormat(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["year"]);
     }
     else if(adx < 2*YEAR){  // a year
-      return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["year"]);
+      return turnToAgoFormat(dx, fuzzyLabels["a"]+" "+fuzzyLabels["year"]);
     }
     else if(adx < 8*YEAR){  // a few years
-      return timePrecedenceFor(dx, fuzzyLabels["few"]+" "+fuzzyLabels["years"]);
+      return turnToAgoFormat(dx, fuzzyLabels["few"]+" "+fuzzyLabels["years"]);
     }
     else if(adx < DECADE){  // almost a decade
-      return timePrecedenceFor(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["decade"]);
+      return turnToAgoFormat(dx, fuzzyLabels["almost"]+" "+fuzzyLabels["a"]+" "+fuzzyLabels["decade"]);
     }
     else if(adx < 2*DECADE){  // almost a decade
-      return timePrecedenceFor(dx, fuzzyLabels["a"]+" "+fuzzyLabels["decade"]);
+      return turnToAgoFormat(dx, fuzzyLabels["a"]+" "+fuzzyLabels["decade"]);
     }
     else if(adx >= 2*DECADE){  // a long time
-      return timePrecedenceFor(dx, fuzzyLabels["long"]);
+      return turnToAgoFormat(dx, fuzzyLabels["long"]);
     }
     else{
       throw new Error("Impossible to assign a fuzzy label");
@@ -227,7 +234,87 @@ function Delta(_eventDate, _timestamp, _updatable) {
   };
   
   this.interval =  function(){
-    console.log("Delta.interval");
+    var dx = timestamp.getTime()/1000.0 - eventDate.getTime()/1000.0;
+    var adx = Math.abs(dx);
+    var output = "";
+
+    // assign fuzzy labels
+    if(adx < 10){  // now
+        output += fuzzyLabels["now"];
+        return output;
+    }
+    else if(adx < 30){  // moments
+        return turnToIntervalFormat(dx, fuzzyLabels["minute"]);
+    }
+    else if(adx < 2*MINUTE){ // a minute
+        return turnToIntervalFormat(dx, fuzzyLabels["minute"]);
+    }
+    else if(adx < 15*MINUTE){  // a few minutes
+        return turnToIntervalFormat(dx, fuzzyLabels["minutes"]);
+    }
+    else if(adx < 45*MINUTE){  // half an hour
+        return turnToIntervalFormat(dx, fuzzyLabels["half"]+" "+fuzzyLabels["an"]+" "+fuzzyLabels["hour"]);
+    }
+    else if(adx < 60*MINUTE){  // almost an hour
+        return turnToIntervalFormat(dx, fuzzyLabels["half"]+" "+fuzzyLabels["an"]+" "+fuzzyLabels["hour"]);
+    }
+    else if(adx < 2*HOUR){  // an hour
+        return turnToIntervalFormat(dx, fuzzyLabels["hour"]);
+    }
+    else if(adx < 9*HOUR){  // a few hours
+        return turnToIntervalFormat(dx, fuzzyLabels["hours"]);
+    }
+    else if(adx < 12*HOUR){  // almost half a day
+        return turnToIntervalFormat(dx, fuzzyLabels["hours"]);
+    }
+    else if(adx < 18*HOUR){  // half a day
+        return turnToIntervalFormat(dx, fuzzyLabels["hours"]);
+    }
+    else if(adx < 2*DAY){  // a day
+        return turnToIntervalFormat(dx, fuzzyLabels["day"]);
+    }
+    else if(adx < 5*DAY){  // a few days
+        return turnToIntervalFormat(dx, fuzzyLabels["days"]);
+    }
+    else if(adx < 7*DAY){  // almost a week
+        return turnToIntervalFormat(dx, fuzzyLabels["week"]);
+    }
+    else if(adx < 14*DAY){  // a week
+        return turnToIntervalFormat(dx, fuzzyLabels["weeks"]);
+    }
+    else if(adx < 21*DAY){  // a few weeks
+        return turnToIntervalFormat(dx, fuzzyLabels["weeks"]);
+    }
+    else if(adx < MONTH){  // almost a month
+        return turnToIntervalFormat(dx, fuzzyLabels["weeks"]);
+    }
+    else if(adx < 2*MONTH){  // a month
+        return turnToIntervalFormat(dx, fuzzyLabels["month"]);
+    }
+    else if(adx < 9*MONTH){  // a few months
+        return turnToIntervalFormat(dx, fuzzyLabels["months"]);
+    }
+    else if(adx < YEAR){  // almost a year
+        return turnToIntervalFormat(dx, fuzzyLabels["months"]);
+    }
+    else if(adx < 2*YEAR){  // a year
+        return turnToIntervalFormat(dx, fuzzyLabels["year"]);
+    }
+    else if(adx < 8*YEAR){  // a few years
+        return turnToIntervalFormat(dx, fuzzyLabels["years"]);
+    }
+    else if(adx < DECADE){  // almost a decade
+        return turnToIntervalFormat(dx, fuzzyLabels["years"]);
+    }
+    else if(adx < 2*DECADE){  // almost a decade
+        return turnToIntervalFormat(dx, fuzzyLabels["decade"]);
+    }
+    else if(adx >= 2*DECADE){  // a long time
+        return turnToAgoFormat(dx, fuzzyLabels["long"]);
+    }
+    else{
+        throw new Error("Impossible to assign a fuzzy label");
+    }
   };
 
   this.calendar =  function(){
