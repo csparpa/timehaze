@@ -357,14 +357,30 @@ function Delta(_eventDate, _timestamp, _updatable) {
               return turnToIntervalFormat(dx, fuzzyLabels["hours"]);
           }
       }
-
-/*
       else if(adx < 12*HOUR){  // almost half a day
-          return turnToIntervalFormat(dx, fuzzyLabels["hours"]);
+          if(days === 1){
+              return fuzzyLabels["yesterday"];
+          }
+          else if(days === -1){
+              return fuzzyLabels["tomorrow"];
+          }
+          else {
+              return turnToIntervalFormat(dx, fuzzyLabels["hours"]);
+          }
       }
       else if(adx < 18*HOUR){  // half a day
-          return turnToIntervalFormat(dx, fuzzyLabels["hours"]);
+          if(days === 1){
+              return fuzzyLabels["yesterday"];
+          }
+          else if(days === -1){
+              return fuzzyLabels["tomorrow"];
+          }
+          else {
+              return turnToIntervalFormat(dx, fuzzyLabels["hours"]);
+          }
       }
+
+/*
       else if(adx < 2*DAY){  // a day
           return turnToIntervalFormat(dx, fuzzyLabels["day"]);
       }
