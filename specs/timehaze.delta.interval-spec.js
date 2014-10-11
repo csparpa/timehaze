@@ -2,7 +2,7 @@ describe("Timehaze.Delta.interval function", function() {
     var th = require('../timehaze.js');
     var res, eventDate = new Date(2000, 0, 1, 0, 0, 0, 0);
 
-    it("should return plain date if no fuzzy label is available", function() {
+    it("should throw error if no fuzzy label is available", function() {
         var timestamp = new Date(9999999, 0, 1, 0, 0, 0, 0);
         function throwingError(){
             return th.delta(eventDate, timestamp).interval();
