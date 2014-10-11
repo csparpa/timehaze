@@ -148,6 +148,18 @@ function Delta(_eventDate, _timestamp, _updatable) {
     }
     return fuzzyLabels["next"] + " " + fuzzyLabel;
   }
+
+  function turnOneDaySpanToCalendarFormat(timedelta, days){
+      if(days === 1){
+          return fuzzyLabels["yesterday"];
+      }
+      else if(days === -1){
+          return fuzzyLabels["tomorrow"];
+      }
+      else {
+          return turnToIntervalFormat(timedelta, fuzzyLabels["hours"]);
+      }
+  }
   
   this.ago =  function(){
     var dx = timestamp.getTime()/1000.0 - eventDate.getTime()/1000.0;
@@ -347,37 +359,13 @@ function Delta(_eventDate, _timestamp, _updatable) {
           return turnToIntervalFormat(dx, fuzzyLabels["hour"]);
       }
       else if(adx < 9*HOUR){  // a few hours
-          if(days === 1){
-              return fuzzyLabels["yesterday"];
-          }
-          else if(days === -1){
-              return fuzzyLabels["tomorrow"];
-          }
-          else {
-              return turnToIntervalFormat(dx, fuzzyLabels["hours"]);
-          }
+          return turnOneDaySpanToCalendarFormat(dx, days);
       }
       else if(adx < 12*HOUR){  // almost half a day
-          if(days === 1){
-              return fuzzyLabels["yesterday"];
-          }
-          else if(days === -1){
-              return fuzzyLabels["tomorrow"];
-          }
-          else {
-              return turnToIntervalFormat(dx, fuzzyLabels["hours"]);
-          }
+          return turnOneDaySpanToCalendarFormat(dx, days);
       }
       else if(adx < 18*HOUR){  // half a day
-          if(days === 1){
-              return fuzzyLabels["yesterday"];
-          }
-          else if(days === -1){
-              return fuzzyLabels["tomorrow"];
-          }
-          else {
-              return turnToIntervalFormat(dx, fuzzyLabels["hours"]);
-          }
+          return turnOneDaySpanToCalendarFormat(dx, days);
       }
 
 /*
