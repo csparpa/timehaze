@@ -367,11 +367,16 @@ function Delta(_eventDate, _timestamp, _updatable) {
       else if(adx < 18*HOUR){  // half a day
           return turnOneDaySpanToCalendarFormat(dx, days);
       }
-
-/*
       else if(adx < 2*DAY){  // a day
-          return turnToIntervalFormat(dx, fuzzyLabels["day"]);
+          if(dx > 0){
+              return fuzzyLabels["yesterday"];
+          }
+          else{
+              return fuzzyLabels["tomorrow"];
+          }
       }
+
+      /*
       else if(adx < 5*DAY){  // a few days
           return turnToIntervalFormat(dx, fuzzyLabels["days"]);
       }

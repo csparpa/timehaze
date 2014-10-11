@@ -169,4 +169,17 @@ describe("Timehaze.Delta.calendar function", function() {
         expect(res).toBe("tomorrow");
     });
 
+    it("should return 'yesterday' once again and again", function() {
+        var timestamp = new Date(2000, 0, 1, 10, 0, 0)
+        var pivot = new Date(1999, 11, 31, 10, 0, 0, 0);
+        res = (th.delta(pivot, timestamp)).calendar();
+        expect(res).toBe("yesterday");
+    });
+
+    it("should return 'tomorrow' once again and again", function() {
+        var pivot = new Date(2000, 0, 1, 10, 0, 0)
+        var timestamp = new Date(1999, 11, 31, 10, 0, 0, 0);
+        res = (th.delta(pivot, timestamp)).calendar();
+        expect(res).toBe("tomorrow");
+    });
 });
