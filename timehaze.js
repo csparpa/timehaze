@@ -502,11 +502,20 @@ function Delta(_eventDate, _timestamp, _updatable) {
               return fuzzyLabels["next"] + " " + fuzzyLabels["weeks"];
           }
       }
+      else if(adx < MONTH){  // almost a month
+          if(timestamp.getMonth() !== eventDate.getMonth()){
+              return turnMonthToCalendarFormt(dx, eventDate.getMonth());
+          }
+          else
+          {
+              if(dx > 0) {
+                  return fuzzyLabels["last"] + " " + fuzzyLabels["weeks"];
+              }
+              return fuzzyLabels["next"] + " " + fuzzyLabels["weeks"];
+          }
+      }
 
       /*
-      else if(adx < MONTH){  // almost a month
-          return turnToIntervalFormat(dx, fuzzyLabels["weeks"]);
-      }
       else if(adx < 2*MONTH){  // a month
           return turnToIntervalFormat(dx, fuzzyLabels["month"]);
       }

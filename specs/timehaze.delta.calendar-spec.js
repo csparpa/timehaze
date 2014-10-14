@@ -329,4 +329,44 @@ describe("Timehaze.Delta.calendar function", function() {
         expect(res2).toBe("next weeks");
     });
 
+    it("should return the last month once again and again", function() {
+        var timestamp1 = new Date(2000, 0, 24, 10, 0, 0);
+        var timestamp2 = new Date(2000, 0, 25, 10, 0, 0);
+        var pivot = new Date(1999, 11, 30, 10, 0, 0, 0);
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2 = (th.delta(pivot, timestamp2)).calendar();
+        expect(res1).toBe("last December");
+        expect(res2).toBe("last December");
+    });
+
+    it("should return the next month once again and again", function() {
+        var timestamp1 =  new Date(1999, 11, 10, 10, 0, 0, 0);
+        var timestamp2 = new Date(1999, 11, 11, 10, 0, 0, 0);
+        var pivot = new Date(2000, 0, 5, 10, 0, 0, 0);
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2 = (th.delta(pivot, timestamp2)).calendar();
+        expect(res1).toBe("next January");
+        expect(res2).toBe("next January");
+    });
+
+    it("should return 'last weeks' again and again", function() {
+        var timestamp1 = new Date(1999, 11, 27, 10, 0, 0);
+        var timestamp2 = new Date(1999, 11, 26, 10, 0, 0);
+        var pivot = new Date(1999, 11, 1, 10, 0, 0, 0);
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2 = (th.delta(pivot, timestamp2)).calendar();
+        expect(res1).toBe("last weeks");
+        expect(res2).toBe("last weeks");
+    });
+
+    it("should return 'next weeks' again and again", function() {
+        var timestamp1 =  new Date(1999, 11, 4, 10, 0, 0, 0);
+        var timestamp2 = new Date(1999, 11, 5, 10, 0, 0, 0);
+        var pivot = new Date(1999, 11, 30, 10, 0, 0, 0);
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2 = (th.delta(pivot, timestamp2)).calendar();
+        expect(res1).toBe("next weeks");
+        expect(res2).toBe("next weeks");
+    });
+
 });
