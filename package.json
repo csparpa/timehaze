@@ -4,7 +4,10 @@
   "description": "Fuzzy timestamps for Node.js",
   "main": "timehaze.js",
   "devDependencies": {
-    "jasmine-node": "~1.14.5"
+      "grunt": "0.4.5",
+      "grunt-jasmine-node": "0.2.1",
+      "grunt-cli": "0.1.13",
+      "jasmine-node": "1.14.5"
   },
   "maintainers": [
     {

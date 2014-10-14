@@ -5,16 +5,8 @@ Fuzzy timestamps for Node.js
 
 Install
 -------
-For the moment:
-
 ```bash
-git clone git@github.com:csparpa/timehaze.git
-```
-
-but it will be soon avaliable on `npm`:
-
-```bash
-npm install timehaze  # coming soon!
+npm install timehaze
 ```
 
 Usage examples
@@ -86,6 +78,12 @@ timehaze.setFuzzyLabels({
 });
 delta = timehaze.delta(event, far_future);
 console.log(delta.ago());    // '17 giorni fa'
+```
+
+Test it
+-------
+```bash
+$ grunt jasmine_node
 ```
 
 License
