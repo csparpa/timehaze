@@ -6,7 +6,7 @@ Fuzzy timestamps for Node.js
 Install
 -------
 ```bash
-npm install timehaze
+$ npm install timehaze
 ```
 
 Usage examples
