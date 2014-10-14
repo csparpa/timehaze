@@ -395,4 +395,24 @@ describe("Timehaze.Delta.calendar function", function() {
         expect(res3).toBe("next July");
     });
 
+    it("should return 'last year'", function() {
+        var timestamp1 = new Date(2002, 5, 1, 10, 0, 0);
+        var timestamp2 = new Date(2001, 7, 1, 10, 0, 0);
+        var pivot = new Date(2000, 6, 20, 10, 0, 0, 0);
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2= (th.delta(pivot, timestamp2)).calendar();
+        expect(res1).toBe("last year");
+        expect(res2).toBe("last year");
+    });
+
+    it("should return 'next year'", function() {
+        var timestamp1 = new Date(1998, 7, 28, 10, 0, 0, 0);
+        var timestamp2 = new Date(1999, 5, 28, 10, 0, 0, 0);
+        var pivot = new Date(2000, 6, 20, 10, 0, 0, 0);
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2= (th.delta(pivot, timestamp2)).calendar();
+        expect(res1).toBe("next year");
+        expect(res2).toBe("next year");
+    });
+
 });

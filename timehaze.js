@@ -523,10 +523,13 @@ function Delta(_eventDate, _timestamp, _updatable) {
       else if(adx < YEAR){  // almost a year
           return turnMonthToCalendarFormt(dx, eventDate.getMonth());
       }
-      /*
       else if(adx < 2*YEAR){  // a year
-          return turnToIntervalFormat(dx, fuzzyLabels["year"]);
+          if(dx > 0) {
+              return fuzzyLabels["last"] + " " + fuzzyLabels["year"];
+          }
+          return fuzzyLabels["next"] + " " + fuzzyLabels["year"];
       }
+      /*
       else if(adx < 8*YEAR){  // a few years
           return turnToIntervalFormat(dx, fuzzyLabels["years"]);
       }
