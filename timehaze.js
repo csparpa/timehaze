@@ -93,7 +93,7 @@ var fuzzyLabels = {
 
 
 /**
-* Properties
+* Properties and objects
 */
 
 this.fuzzyLabels = fuzzyLabels;
@@ -103,9 +103,6 @@ this.interval = setInterval(function(){
   emitter.emit('updateFuzzyTimestamp');
 }, this.updateMillis);
 
-/**
-* Objects
-*/
 function Delta(_eventDate, _timestamp, _updatable) {
 
   var eventDate = _eventDate;  // pivot date
@@ -567,7 +564,7 @@ function Delta(_eventDate, _timestamp, _updatable) {
 
 exports.delta = function(eventDate, timestamp, updatable) {
   return new Delta(eventDate, timestamp, updatable);
-}
+};
 
 exports.update = function(how_many_millis) {
   if(typeof how_many_millis !== "undefined"){
@@ -577,7 +574,7 @@ exports.update = function(how_many_millis) {
   this.interval = setInterval(function(){
       emitter.emit('updateFuzzyTimestamp');
     }, this.updateMillis);
-}
+};
 
 exports.stopUpdate = function(){
   clearInterval(this.interval);
@@ -587,8 +584,8 @@ exports.setFuzzyLabels = function(labels) {
   for (var key in labels){
     this.fuzzyLabels[key] = labels[key];
   }
-}
+};
 
 exports.getFuzzyLabels = function() {
   return this.fuzzyLabels;
-}
+};

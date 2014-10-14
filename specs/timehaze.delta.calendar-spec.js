@@ -467,4 +467,18 @@ describe("Timehaze.Delta.calendar function", function() {
         expect(res3).toBe("next decade");
     });
 
+    it("should return 'a long time ago' for very big timedeltas", function() {
+        var timestamp = new Date(2050, 2, 1, 0, 0, 0, 0);
+        var pivot = new Date(2000, 6, 20, 10, 0, 0, 0);
+        var res = (th.delta(eventDate, timestamp)).interval();
+        expect(res).toBe("a long time ago");
+    });
+
+    it("should return 'in a long time' for very big timedeltas", function() {
+        var timestamp = new Date(1930, 2, 1, 0, 0, 0, 0);
+        var pivot = new Date(2000, 6, 20, 10, 0, 0, 0);
+        var res = (th.delta(eventDate, timestamp)).interval();
+        expect(res).toBe("in a long time");
+    });
+
 });
