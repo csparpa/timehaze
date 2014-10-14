@@ -524,35 +524,20 @@ function Delta(_eventDate, _timestamp, _updatable) {
           return turnMonthToCalendarFormt(dx, eventDate.getMonth());
       }
       else if(adx < 2*YEAR){  // a year
-          if(dx > 0) {
-              return fuzzyLabels["last"] + " " + fuzzyLabels["year"];
-          }
-          return fuzzyLabels["next"] + " " + fuzzyLabels["year"];
+          return turnToIntervalFormat(dx, fuzzyLabels["year"]);
       }
       else if(adx < 8*YEAR){  // a few years
-          if(dx > 0) {
-              return fuzzyLabels["last"] + " " + fuzzyLabels["years"];
-          }
-          return fuzzyLabels["next"] + " " + fuzzyLabels["years"];
+          return turnToIntervalFormat(dx, fuzzyLabels["years"]);
       }
       else if(adx < DECADE){  // almost a decade
-          if(dx > 0) {
-              return fuzzyLabels["last"] + " " + fuzzyLabels["years"];
-          }
-          return fuzzyLabels["next"] + " " + fuzzyLabels["years"];
+          return turnToIntervalFormat(dx, fuzzyLabels["years"]);
       }
-      /*
       else if(adx < 2*DECADE){  // almost a decade
           return turnToIntervalFormat(dx, fuzzyLabels["decade"]);
       }
       else if(adx >= 2*DECADE){  // a long time
           return turnToAgoFormat(dx, fuzzyLabels["long"]);
       }
-
-*/
-
-
-
       else{
           throw new Error("Impossible to assign a fuzzy label");
       }

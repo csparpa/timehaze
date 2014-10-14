@@ -441,4 +441,30 @@ describe("Timehaze.Delta.calendar function", function() {
         expect(res3).toBe("next years");
     });
 
+    it("should return 'last decade'", function() {
+        var timestamp1 = new Date(2011, 5, 1, 10, 0, 0);
+        var timestamp2 = new Date(2015, 7, 1, 10, 0, 0);
+        var timestamp3 = new Date(2019, 7, 1, 10, 0, 0);
+        var pivot = new Date(2000, 6, 20, 10, 0, 0, 0);
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2= (th.delta(pivot, timestamp2)).calendar();
+        var res3= (th.delta(pivot, timestamp3)).calendar();
+        expect(res1).toBe("last decade");
+        expect(res2).toBe("last decade");
+        expect(res3).toBe("last decade");
+    });
+
+    it("should return 'next decade'", function() {
+        var timestamp1 = new Date(1989, 7, 28, 10, 0, 0, 0);
+        var timestamp2 = new Date(1985, 5, 28, 10, 0, 0, 0);
+        var timestamp3 = new Date(1981, 5, 28, 10, 0, 0, 0);
+        var pivot = new Date(2000, 6, 20, 10, 0, 0, 0);
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2= (th.delta(pivot, timestamp2)).calendar();
+        var res3= (th.delta(pivot, timestamp3)).calendar();
+        expect(res1).toBe("next decade");
+        expect(res2).toBe("next decade");
+        expect(res3).toBe("next decade");
+    });
+
 });
