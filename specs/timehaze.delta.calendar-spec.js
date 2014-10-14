@@ -209,4 +209,43 @@ describe("Timehaze.Delta.calendar function", function() {
         expect(res3).toBe("next Thursday");
     });
 
+    it("should return the last month", function() {
+        var timestamp1 = new Date(2000, 0, 4, 10, 0, 0);
+        var timestamp2 = new Date(2000, 0, 5, 10, 0, 0);
+        var pivot = new Date(1999, 11, 30, 10, 0, 0, 0);
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2 = (th.delta(pivot, timestamp2)).calendar();
+        expect(res1).toBe("last December");
+        expect(res2).toBe("last December");
+    });
+
+    it("should return the next month", function() {
+        var timestamp1 =  new Date(1999, 11, 31, 10, 0, 0, 0);
+        var timestamp2 = new Date(1999, 11, 30, 10, 0, 0, 0);
+        var pivot = new Date(2000, 0, 5, 10, 0, 0, 0);
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2 = (th.delta(pivot, timestamp2)).calendar();
+        expect(res1).toBe("next January");
+        expect(res2).toBe("next January");
+    });
+
+    it("should return the last weekday again", function() {
+        var timestamp1 = new Date(1999, 11, 28, 10, 0, 0);  // Tue
+        var timestamp2 = new Date(1999, 11, 29, 10, 0, 0);
+        var pivot = new Date(1999, 11, 23, 10, 0, 0, 0); // Thursday
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2 = (th.delta(pivot, timestamp2)).calendar();
+        expect(res1).toBe("last Thursday");
+        expect(res2).toBe("last Thursday");
+    });
+
+    it("should return the next weekday again", function() {
+        var timestamp1 =  new Date(1999, 11, 25, 10, 0, 0, 0);  // Sat
+        var timestamp2 = new Date(1999, 11, 24, 10, 0, 0, 0);
+        var pivot = new Date(1999, 11, 30, 10, 0, 0, 0); // Thursday
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2 = (th.delta(pivot, timestamp2)).calendar();
+        expect(res1).toBe("next Thursday");
+        expect(res2).toBe("next Thursday");
+    });
 });

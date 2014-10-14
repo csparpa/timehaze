@@ -174,6 +174,9 @@ function Delta(_eventDate, _timestamp, _updatable) {
           result = fuzzyLabels["next"] + " ";
       }
       switch(eventDateDay) {
+          case 0:
+              result += fuzzyLabels["sunday"];
+              break;
           case 1:
               result += fuzzyLabels["monday"];
               break;
@@ -192,8 +195,56 @@ function Delta(_eventDate, _timestamp, _updatable) {
           case 6:
               result += fuzzyLabels["saturday"];
               break;
+          default:
+              throw new Error("Impossible to assign a fuzzy label");
+      }
+      return result;
+  }
+
+  function turnMonthToCalendarFormt(timedelta, eventDateMonth){
+      var result;
+      if(timedelta > 0){
+          result = fuzzyLabels["last"] + " ";
+      }
+      else{
+          result = fuzzyLabels["next"] + " ";
+      }
+      switch(eventDateMonth) {
+          case 0:
+              result += fuzzyLabels["january"];
+              break;
+          case 1:
+              result += fuzzyLabels["february"];
+              break;
+          case 2:
+              result += fuzzyLabels["march"];
+              break;
+          case 3:
+              result += fuzzyLabels["april"];
+              break;
+          case 4:
+              result += fuzzyLabels["may"];
+              break;
+          case 5:
+              result += fuzzyLabels["june"];
+              break;
+          case 6:
+              result += fuzzyLabels["july"];
+              break;
           case 7:
-              result += fuzzyLabels["sunday"];
+              result += fuzzyLabels["august"];
+              break;
+          case 8:
+              result += fuzzyLabels["september"];
+              break;
+          case 9:
+              result += fuzzyLabels["october"];
+              break;
+          case 10:
+              result += fuzzyLabels["november"];
+              break;
+          case 11:
+              result += fuzzyLabels["december"];
               break;
           default:
               throw new Error("Impossible to assign a fuzzy label");
@@ -373,10 +424,6 @@ function Delta(_eventDate, _timestamp, _updatable) {
   this.calendar =  function(){
       var dx = timestamp.getTime()/1000.0 - eventDate.getTime()/1000.0;
       var adx = Math.abs(dx);
-
-      var timestamp_day =  (timestamp.getDay() === 0 ? 7 : timestamp.getDay());
-      var eventDate_day =  (eventDate.getDay() === 0 ? 7 : eventDate.getDay());
-      var days = timestamp_day - eventDate_day;
       var output = "";
 
       // assign fuzzy labels
@@ -422,11 +469,17 @@ function Delta(_eventDate, _timestamp, _updatable) {
       else if(adx < 5*DAY){  // a few days
           return turnWeekToCalendarFormat(dx, eventDate.getDay());
       }
+      else if(adx < 7*DAY){  // almost a week
+          if(timestamp.getMonth() !== eventDate.getMonth()){
+              return turnMonthToCalendarFormt(dx, eventDate.getMonth());
+          }
+          else
+          {
+              return turnWeekToCalendarFormat(dx, eventDate.getDay());
+          }
+      }
 
       /*
-      else if(adx < 7*DAY){  // almost a week
-          return turnToIntervalFormat(dx, fuzzyLabels["week"]);
-      }
       else if(adx < 14*DAY){  // a week
           return turnToIntervalFormat(dx, fuzzyLabels["weeks"]);
       }
