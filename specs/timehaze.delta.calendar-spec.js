@@ -369,4 +369,18 @@ describe("Timehaze.Delta.calendar function", function() {
         expect(res2).toBe("next weeks");
     });
 
+    it("should return the last month on a scale of months", function() {
+        var timestamp = new Date(2000, 8, 1, 10, 0, 0);
+        var pivot = new Date(2000, 6, 20, 10, 0, 0, 0);
+        var res= (th.delta(pivot, timestamp)).calendar();
+        expect(res).toBe("last July");
+    });
+
+    it("should return the next month on a scale of months", function() {
+        var timestamp = new Date(2000, 5, 28, 10, 0, 0, 0);
+        var pivot = new Date(2000, 6, 20, 10, 0, 0, 0);
+        var res= (th.delta(pivot, timestamp)).calendar();
+        expect(res).toBe("next July");
+    });
+
 });

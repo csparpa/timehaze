@@ -514,11 +514,11 @@ function Delta(_eventDate, _timestamp, _updatable) {
               return fuzzyLabels["next"] + " " + fuzzyLabels["weeks"];
           }
       }
+      else if(adx < 2*MONTH){  // a month
+          return turnMonthToCalendarFormt(dx, eventDate.getMonth());
+      }
 
       /*
-      else if(adx < 2*MONTH){  // a month
-          return turnToIntervalFormat(dx, fuzzyLabels["month"]);
-      }
       else if(adx < 9*MONTH){  // a few months
           return turnToIntervalFormat(dx, fuzzyLabels["months"]);
       }
