@@ -2,6 +2,8 @@
 * Timehaze.js
 */
 
+"use strict";
+
 
 /**
 * Import modules
@@ -149,18 +151,57 @@ function Delta(_eventDate, _timestamp, _updatable) {
     return fuzzyLabels["next"] + " " + fuzzyLabel;
   }
 
-  function turnOneDaySpanToCalendarFormat(timedelta, days){
-      if(days === 1){
-          return fuzzyLabels["yesterday"];
-      }
-      else if(days === -1){
-          return fuzzyLabels["tomorrow"];
+  function turnOneDaySpanToCalendarFormat(timedelta){
+      if(timestamp.getDay() !== eventDate.getDay()){
+          if(timedelta > 0) {
+              return fuzzyLabels["yesterday"];
+          }
+          else{
+              return fuzzyLabels["tomorrow"];
+          }
       }
       else {
           return turnToIntervalFormat(timedelta, fuzzyLabels["hours"]);
       }
   }
-  
+
+  function turnWeekToCalendarFormat(timedelta, eventDateDay){
+      var result;
+      if(timedelta > 0){
+          result = fuzzyLabels["last"] + " ";
+      }
+      else{
+          result = fuzzyLabels["next"] + " ";
+      }
+      switch(eventDateDay) {
+          case 1:
+              result += fuzzyLabels["monday"];
+              break;
+          case 2:
+              result += fuzzyLabels["tuesday"];
+              break;
+          case 3:
+              result += fuzzyLabels["wednesday"];
+              break;
+          case 4:
+              result += fuzzyLabels["thursday"];
+              break;
+          case 5:
+              result += fuzzyLabels["friday"];
+              break;
+          case 6:
+              result += fuzzyLabels["saturday"];
+              break;
+          case 7:
+              result += fuzzyLabels["sunday"];
+              break;
+          default:
+              throw new Error("Impossible to assign a fuzzy label");
+      }
+      return result;
+  }
+
+
   this.ago =  function(){
     var dx = timestamp.getTime()/1000.0 - eventDate.getTime()/1000.0;
     var adx = Math.abs(dx);
@@ -332,7 +373,10 @@ function Delta(_eventDate, _timestamp, _updatable) {
   this.calendar =  function(){
       var dx = timestamp.getTime()/1000.0 - eventDate.getTime()/1000.0;
       var adx = Math.abs(dx);
-      var days = timestamp.getDay() - eventDate.getDay();
+
+      var timestamp_day =  (timestamp.getDay() === 0 ? 7 : timestamp.getDay());
+      var eventDate_day =  (eventDate.getDay() === 0 ? 7 : eventDate.getDay());
+      var days = timestamp_day - eventDate_day;
       var output = "";
 
       // assign fuzzy labels
@@ -359,13 +403,13 @@ function Delta(_eventDate, _timestamp, _updatable) {
           return turnToIntervalFormat(dx, fuzzyLabels["hour"]);
       }
       else if(adx < 9*HOUR){  // a few hours
-          return turnOneDaySpanToCalendarFormat(dx, days);
+          return turnOneDaySpanToCalendarFormat(dx);
       }
       else if(adx < 12*HOUR){  // almost half a day
-          return turnOneDaySpanToCalendarFormat(dx, days);
+          return turnOneDaySpanToCalendarFormat(dx);
       }
       else if(adx < 18*HOUR){  // half a day
-          return turnOneDaySpanToCalendarFormat(dx, days);
+          return turnOneDaySpanToCalendarFormat(dx);
       }
       else if(adx < 2*DAY){  // a day
           if(dx > 0){
@@ -375,11 +419,11 @@ function Delta(_eventDate, _timestamp, _updatable) {
               return fuzzyLabels["tomorrow"];
           }
       }
+      else if(adx < 5*DAY){  // a few days
+          return turnWeekToCalendarFormat(dx, eventDate.getDay());
+      }
 
       /*
-      else if(adx < 5*DAY){  // a few days
-          return turnToIntervalFormat(dx, fuzzyLabels["days"]);
-      }
       else if(adx < 7*DAY){  // almost a week
           return turnToIntervalFormat(dx, fuzzyLabels["week"]);
       }
