@@ -1,6 +1,8 @@
 Timehaze
 ========
 
+[![NPM](https://nodei.co/npm/timehaze.png?downloads=true)](https://nodei.co/npm/timehaze/)
+
 Fuzzy timestamps for Node.js
 
 Install
