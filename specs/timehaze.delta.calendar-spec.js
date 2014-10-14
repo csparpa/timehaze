@@ -370,17 +370,29 @@ describe("Timehaze.Delta.calendar function", function() {
     });
 
     it("should return the last month on a scale of months", function() {
-        var timestamp = new Date(2000, 8, 1, 10, 0, 0);
+        var timestamp1 = new Date(2000, 8, 1, 10, 0, 0);
+        var timestamp2 = new Date(2001, 0, 1, 10, 0, 0);
+        var timestamp3 = new Date(2001, 5, 1, 10, 0, 0);
         var pivot = new Date(2000, 6, 20, 10, 0, 0, 0);
-        var res= (th.delta(pivot, timestamp)).calendar();
-        expect(res).toBe("last July");
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2= (th.delta(pivot, timestamp2)).calendar();
+        var res3= (th.delta(pivot, timestamp3)).calendar();
+        expect(res1).toBe("last July");
+        expect(res2).toBe("last July");
+        expect(res3).toBe("last July");
     });
 
     it("should return the next month on a scale of months", function() {
-        var timestamp = new Date(2000, 5, 28, 10, 0, 0, 0);
+        var timestamp1 = new Date(2000, 5, 28, 10, 0, 0, 0);
+        var timestamp2 = new Date(2000, 0, 28, 10, 0, 0, 0);
+        var timestamp3 = new Date(1999, 7, 28, 10, 0, 0, 0);
         var pivot = new Date(2000, 6, 20, 10, 0, 0, 0);
-        var res= (th.delta(pivot, timestamp)).calendar();
-        expect(res).toBe("next July");
+        var res1= (th.delta(pivot, timestamp1)).calendar();
+        var res2= (th.delta(pivot, timestamp2)).calendar();
+        var res3= (th.delta(pivot, timestamp3)).calendar();
+        expect(res1).toBe("next July");
+        expect(res2).toBe("next July");
+        expect(res3).toBe("next July");
     });
 
 });
