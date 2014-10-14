@@ -535,10 +535,13 @@ function Delta(_eventDate, _timestamp, _updatable) {
           }
           return fuzzyLabels["next"] + " " + fuzzyLabels["years"];
       }
-      /*
       else if(adx < DECADE){  // almost a decade
-          return turnToIntervalFormat(dx, fuzzyLabels["years"]);
+          if(dx > 0) {
+              return fuzzyLabels["last"] + " " + fuzzyLabels["years"];
+          }
+          return fuzzyLabels["next"] + " " + fuzzyLabels["years"];
       }
+      /*
       else if(adx < 2*DECADE){  // almost a decade
           return turnToIntervalFormat(dx, fuzzyLabels["decade"]);
       }
