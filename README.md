@@ -28,7 +28,7 @@ var timehaze = require('timehaze');
 
 // Timedeltas between two timestamps
 var delta = timehaze.delta(event, far_future);
-console.log(delta.ago());    // 'In more than 500 years'
+console.log(delta.ago());         // 'In more than 500 years'
 
 // ... or with respect to current timestamp
 delta = timehaze.delta(close_past);
@@ -40,8 +40,8 @@ console.log(delta.interval());    // 'Last day'
 
 // By default, automatic timedeltas update is off
 var evolving_delta = timehaze.delta(close_past, true);
-timehaze.update(1500);  // Update all evolving timedeltas every 2000 millis (default is 1000)
-setInterval(function(){  // print fuzzy timestamp every second and check it gets updated
+timehaze.update(1500);                // Update all evolving timedeltas every 1500 millis (default is 1000)
+setInterval(function(){               // print fuzzy timestamp every second and check it gets updated
   console.log(evolving_delta.ago());
 }, 1000); 
 
